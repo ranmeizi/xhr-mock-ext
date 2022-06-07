@@ -1,0 +1,8 @@
+export const TYPE_ADD = 'TYPE_ADD'
+
+// collection
+export const COLLECTION_ADD = 'COLLECTION_ADD'
+export const COLLECTION_EDIT = 'COLLECTION_EDIT'
+export const COLLECTION_DEL = 'COLLECTION_DEL'
+export const COLLECTION_BYID = 'COLLECTION_BYID'
+export const COLLECTION_GET = 'COLLECTION_GET'

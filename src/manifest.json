@@ -1,0 +1,16 @@
+{
+	"manifest_version": 2,
+	"name": "zcr",
+	"description": "ceshi",
+	"version": "1.0",
+	"web_accessible_resources": [],
+	"background": {
+		"page": "background.html"
+	},
+	"browser_action": 
+	{
+		"default_icon": "img/m.png",
+		"default_title": "这是一个示例Chrome插件",
+		"default_popup": "popup.html"
+	}
+}
