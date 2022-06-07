@@ -9,6 +9,9 @@ class Controller {
      */
     async [Actions.COLLECTION_ADD](ctx: Ctx<Omit<CollectionEntity, 'id' | 'typeId'>>) {
         const db = getDbRef()
+
+        // 如果是type === 1 是matching，那么新建 matching 关联进去
+
         const collection: CollectionEntity = {
             id: uuidv4(),
             name: ctx.data.name,
@@ -16,6 +19,7 @@ class Controller {
             type: ctx.data.type,
             typeId: '' // 新增时关联 id 为空
         }
+
         await db.collections.collection.insert(collection)
 
         ctx.sendResponse({

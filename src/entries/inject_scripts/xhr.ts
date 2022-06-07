@@ -4,7 +4,6 @@ import { proxy, unProxy } from "ajax-hook";
 proxy({
     //请求发起前进入
     onRequest: (config, handler) => {
-        console.log(config.url)
         if (/getFirstGroupList/.test(config.url)) {
             handler.resolve({
                 config: config,
