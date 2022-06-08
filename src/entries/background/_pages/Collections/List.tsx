@@ -4,6 +4,7 @@ import CollectionTree, { TreeNode } from './components/Tree'
 import CollectionEdit from './components/Edit'
 import { Divider } from '@mui/material'
 import { StackContainer } from './Styled'
+import MatchingEdit from '../Matching/Edit'
 
 export default function () {
     const [selected, setSelected] = useState<TreeNode>()
@@ -30,9 +31,17 @@ export default function () {
         </Paper>
         {/* 右边编辑 */}
         <Paper style={{ flex: 1 }}>
-            {rightView}
+            {
+                selected?.type !== undefined
+                    ? <CollectionEdit id={selected?.id} />
+                    : null
+            }
             <Divider light />
-            虾米哪内容
+            {
+                selected?.type === 1
+                    ? <MatchingEdit id={selected?.typeId} />
+                    : null
+            }
         </Paper>
     </StackContainer>
 }

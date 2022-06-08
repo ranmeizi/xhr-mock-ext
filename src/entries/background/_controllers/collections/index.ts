@@ -1,6 +1,7 @@
 import * as Actions from '../Actions'
 import { v4 as uuidv4 } from 'uuid';
 import { getDbRef } from '../../_idb'
+import { controller as MC } from '../matching'
 
 class Controller {
     /**
@@ -11,13 +12,17 @@ class Controller {
         const db = getDbRef()
 
         // 如果是type === 1 是matching，那么新建 matching 关联进去
+        let typeId = ''
+        if (ctx.data.type === 1) {
+            typeId = (await MC.add()).id
+        }
 
         const collection: CollectionEntity = {
             id: uuidv4(),
             name: ctx.data.name,
             parentId: ctx.data.parentId,
             type: ctx.data.type,
-            typeId: '' // 新增时关联 id 为空
+            typeId: typeId
         }
 
         await db.collections.collection.insert(collection)

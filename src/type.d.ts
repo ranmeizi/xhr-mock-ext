@@ -29,3 +29,13 @@ type CollectionEntity = {
     type: 0 | 1
     typeId: string
 }
+
+type MatchingEntity = {
+    id: string
+    regexpStr: string
+    mode: 0 | 1 | 2
+    resScript: string
+    resJson: string
+    typeId: string
+    enabled: boolean
+}

@@ -72,7 +72,10 @@ export default function () {
             <List style={{ width: 200 }}>
                 {config.map((item, index) => (
                     <ListItem key={item.value} disablePadding>
-                        <ListItemButton selected={page === item.value} onClick={() => setPage(item.value as keyof typeof Pages)}>
+                        <ListItemButton selected={page === item.value} onClick={() => {
+                            setOpen(false)
+                            setPage(item.value as keyof typeof Pages)
+                        }}>
                             <ListItemIcon>
                                 {
                                     item.icon

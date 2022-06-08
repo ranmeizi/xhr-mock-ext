@@ -146,7 +146,7 @@ export default function CollectionTree({
 
     return <div>
         <Box padding={2}>
-            <Stack direction={'row'} justifyContent='space-between'>
+            <Stack direction={'row'} justifyContent='space-between' alignItems='center'>
                 <span>当前节点：{flat[selectedId]?.name}</span>
                 <IconButton onClick={() => onAdd('', 0)}><AddIcon /></IconButton>
             </Stack>
@@ -157,7 +157,7 @@ export default function CollectionTree({
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ChevronRightIcon />}
             onNodeSelect={onNodeSelect}
-            sx={{ flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
+            sx={{ flexGrow: 1, minHeight: '400px', maxWidth: 400, overflowY: 'auto' }}
         >
             {renderTree(tree)}
         </TreeView>

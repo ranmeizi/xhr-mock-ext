@@ -8,11 +8,12 @@ const schema = {
         id: {
             type: 'string'
         },
-        name: {
-            type: 'string'
-        },
         /* 正则 */
         regexpStr: {
+            type: 'string'
+        },
+        /* 模式 0-json 1-script 2-type */
+        mode: {
             type: 'string'
         },
         /* 响应执行脚本 */
@@ -27,14 +28,11 @@ const schema = {
         typeId: {
             type: 'string'
         },
-        /* 范型参数 */
-        typeArgs: {
-            type: "array",
-            items: {
-                type: "string"
-            }
+        /* 启用状态 */
+        enabled: {
+            type: 'boolean'
         }
     },
-    required: ['id', 'regexpStr', 'resTypeId']
+    required: ['id']
 }
 export default schema

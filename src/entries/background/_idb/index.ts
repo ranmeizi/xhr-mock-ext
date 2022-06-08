@@ -1,6 +1,7 @@
 import { createRxDatabase, RxDatabase, addRxPlugin } from 'rxdb';
 import collectionSchema from './schemas/collection'
 import typeSchema from './schemas/type'
+import matchingSchema from './schemas/matching'
 // because we use the PouchDB RxStorage, we have to add the indexeddb adapter first.
 import { getRxStorageDexie } from 'rxdb/plugins/dexie';
 import { RxDBUpdatePlugin } from 'rxdb/plugins/update';
@@ -24,6 +25,9 @@ async function dbOpen() {
   const a = await db.addCollections({
     collection: {
       schema: collectionSchema
+    },
+    matching: {
+      schema: matchingSchema
     },
     type: {
       schema: typeSchema
