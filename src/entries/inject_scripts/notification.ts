@@ -9,12 +9,14 @@ function init() {
 
 type openProps = {
     title: string,
-    content: string
+    content: string,
+    timeout?: number
 }
 
 export function open({
     title,
-    content
+    content,
+    timeout = 3000
 }: openProps) {
     // 创建节点
     const panel = document.createElement('div')
@@ -74,6 +76,8 @@ export function open({
             requestAnimationFrame(openAnim)
         }
     })
+
+    setTimeout(close, timeout);
 }
 
 init()

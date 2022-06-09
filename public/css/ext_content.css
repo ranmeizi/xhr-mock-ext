@@ -9,6 +9,7 @@
 }
 
 .chrome-notification>.chrome-notification-panel {
+    margin-top      : 24px;
     padding         : 16px;
     border-radius   : 8px;
     box-shadow      : 0 3px 6px -4px #0000001f, 0 6px 16px #00000014, 0 9px 28px 8px #0000000d;
@@ -25,6 +26,17 @@
     font-size      : 24px;
     font-weight    : 600;
 }
+
+.chrome-notification-panel .chrome-notification-panel-title-close {
+    font-style: normal;
+    cursor    : pointer;
+    transition: 0.3s;
+}
+
+.chrome-notification-panel .chrome-notification-panel-title-close:hover {
+    color: #096dd9;
+}
+
 
 .chrome-notification-panel>.chrome-notification-panel-content {
     padding  : 24px 0;

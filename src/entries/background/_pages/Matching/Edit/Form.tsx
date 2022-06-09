@@ -3,6 +3,7 @@ import { createForm, PropsWithForm, FormValidateRule } from 'rc-form'
 import { TextField, Select, MenuItem, Grid, FormControl, Switch, InputLabel, Button, Stack } from '@mui/material'
 import ModeTab from '../component/ModeTab'
 import JSONTextArea from '../component/JSONTextArea'
+import CodeTextArea from '../component/CodeTextArea'
 
 // 表单组件属性
 type Props = {
@@ -39,7 +40,9 @@ function Form({
         id: 'tab-resscript',
         value: 1,
         label: 'Res 中间件',
-        children: <div>等等再写</div>
+        children: <CodeTextArea  {...getFieldProps('resScript', {
+            initialValue: ''
+        })} />
     }, {
         id: 'tab-restype',
         value: 2,
@@ -82,7 +85,7 @@ function Form({
                         fullWidth
                     >
                         {
-                            tabs.map((item) => <MenuItem value={item.id}>{item.label}</MenuItem>)
+                            tabs.map((item) => <MenuItem value={item.value}>{item.label}</MenuItem>)
                         }
                     </Select>
                 </FormControl>

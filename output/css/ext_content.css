@@ -26,6 +26,17 @@
     font-weight    : 600;
 }
 
+.chrome-notification-panel .chrome-notification-panel-title-close {
+    font-style: normal;
+    cursor    : pointer;
+    transition: 0.3s;
+}
+
+.chrome-notification-panel .chrome-notification-panel-title-close:hover {
+    color: #096dd9;
+}
+
+
 .chrome-notification-panel>.chrome-notification-panel-content {
     padding  : 24px 0;
     font-size: 18px;

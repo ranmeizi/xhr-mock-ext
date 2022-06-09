@@ -6,7 +6,7 @@ let matchings: MatchingEntity[] = []
 
 proxy({
     //请求发起前进入
-    onRequest: (config, handler) => {
+    onRequest: async (config, handler) => {
         for (const matching of matchings) {
             const regexp = new RegExp(matching.regexpStr)
             if (regexp.test(config.url)) {
@@ -14,11 +14,13 @@ proxy({
                     title: 'xhr_mock_ext拦截提醒',
                     content: `/<span style="color:red">${matching.regexpStr}</span>/ ,已被拦截`
                 })
+                const response = await matchingHandler(matching, config)
+                console.log(response)
                 return handler.resolve({
                     config: config,
                     status: 200,
                     headers: { 'content-type': 'application/json;charset=UTF-8' },
-                    response: matching.resJson
+                    response: response
                 })
             }
         }
@@ -26,6 +28,22 @@ proxy({
         handler.next(config);
     }
 })
+
+async function matchingHandler(matching: MatchingEntity, config): string {
+    console.log(matching)
+    switch (matching.mode) {
+        case 0: return matching.resJson;
+        case 1: return await scriptHandler(matching, config)
+    }
+}
+
+
+async function scriptHandler(matching: MatchingEntity, config) {
+    const middleware = new Function(matching.resScript)
+
+    return await middleware(config)
+}
+
 
 function init() {
     getMatchings()
