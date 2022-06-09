@@ -34,8 +34,8 @@ export function open({
     const titleCloseBtn = document.createElement('i')
     titleCloseBtn.className = 'chrome-notification-panel-title-close'
     titleCloseBtn.innerText = 'x'
-    titleCloseBtn.addEventListener('click', function close() {
-        titleCloseBtn.removeEventListener('click', close)
+    function closeN() {
+        titleCloseBtn.removeEventListener('click', closeN)
         const width = panel.clientWidth
 
         let target = 0
@@ -49,7 +49,8 @@ export function open({
                 panel.remove()
             }
         })
-    })
+    }
+    titleCloseBtn.addEventListener('click', closeN)
 
     // 创建content
     const contentEl = document.createElement('div')
@@ -77,7 +78,7 @@ export function open({
         }
     })
 
-    setTimeout(close, timeout);
+    setTimeout(closeN, timeout);
 }
 
 init()
