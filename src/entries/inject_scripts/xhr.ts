@@ -1,18 +1,48 @@
 // @ts-nocheck
 import { proxy, unProxy } from "ajax-hook";
 
+let matchings: MatchingEntity[] = []
+
 proxy({
     //请求发起前进入
     onRequest: (config, handler) => {
-        if (/getFirstGroupList/.test(config.url)) {
-            handler.resolve({
-                config: config,
-                status: 200,
-                headers: { 'content-type': 'application/json;charset=UTF-8' },
-                response: JSON.stringify({ "code": 200, "message": "success", "data": { "records": [{ "id": 9, "groupsName": "???", "groupsCode": null, "groupsFullName": "前厅端菜开心发呆", "uniformSocialCreditCode": "很有信用", "remarks": null, "deleteFlag": null, "createTime": 1653065417000, "creator": "波波安", "updateTime": 1653065417000, "updater": "波波安" }], "total": 1, "size": 10, "current": 1, "orders": [{ "column": "createTime", "asc": false }], "optimizeCountSql": true, "hitCount": false, "countId": null, "maxLimit": null, "searchCount": true, "pages": 1 } })
-            })
-        } else {
-            handler.next(config);
+        for (const matching of matchings) {
+            const regexp = new RegExp(matching.regexpStr)
+            if (regexp.test(config.url)) {
+                return handler.resolve({
+                    config: config,
+                    status: 200,
+                    headers: { 'content-type': 'application/json;charset=UTF-8' },
+                    response: matching.resJson
+                })
+            }
         }
+
+        handler.next(config);
     }
 })
+
+function openModal(){
+    
+}
+
+function init() {
+    getMatchings()
+
+    window.addEventListener('message', (e) => {
+        const { data } = e
+
+        if (data.event === 'inject_get_matching_res') {
+            matchings = e.data.data
+        }
+    })
+}
+
+function getMatchings() {
+    window.postMessage({
+        event: 'inject_get_matching',
+        data: null
+    })
+}
+
+init()

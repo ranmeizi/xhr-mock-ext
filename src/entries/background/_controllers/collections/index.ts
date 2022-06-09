@@ -45,9 +45,7 @@ class Controller {
         }).exec()
         await doc.update({
             $set: {
-                name: ctx.data.name,
-                type: ctx.data.type,
-                typeId: ctx.data.typeId
+                name: ctx.data.name
             }
         })
 
@@ -125,6 +123,13 @@ class Controller {
             })
         }
         return children
+    }
+
+    hallo_world(ctx: Ctx) {
+        ctx.sendResponse({
+            code: 200,
+            data: 'hello world'
+        })
     }
 }
 

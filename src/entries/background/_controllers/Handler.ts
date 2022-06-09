@@ -3,6 +3,18 @@ const createHandler = function () {
     const actions: middlewire[] = []
 
     const ins = async (message: Message, sender: chrome.runtime.MessageSender, sendResponse: (response?: any) => void) => {
+
+        if (sender && message.async) {
+            console.log('www??')
+            sendResponse = function (data) {
+                console.log('是我了')
+                chrome.tabs.sendMessage(sender.tab.id, {
+                    type: message.type + '_RES',
+                    data: data.data
+                })
+            }
+        }
+
         const ctx = {
             message,
             sender,

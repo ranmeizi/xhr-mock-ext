@@ -1,7 +1,8 @@
 
 type Message = {
     type: string,
-    data: any
+    data: any,
+    async?: boolean
 }
 
 type Ctx<T = any> = {

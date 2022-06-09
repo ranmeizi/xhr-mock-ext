@@ -1,34 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { createForm, PropsWithForm, FormValidateRule } from 'rc-form'
-import { TextField, Select, MenuItem, Box, Typography, Stack, FormControl, InputLabel, Button } from '@mui/material'
+import { TextField, Select, MenuItem, Grid, FormControl, Switch, InputLabel, Button, Stack } from '@mui/material'
 import ModeTab from '../component/ModeTab'
 import JSONTextArea from '../component/JSONTextArea'
-
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`vertical-tabpanel-${index}`}
-            aria-labelledby={`vertical-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
 
 // 表单组件属性
 type Props = {
@@ -84,8 +58,8 @@ function Form({
 
     return <div>
         {/* 匹配 */}
-        <Stack direction={'row'} justifyContent='space-between'>
-            <Stack direction={'row'} spacing={2} padding={[2, 0]}>
+        <Grid container spacing={2}>
+            <Grid item xs={5}>
                 <TextField
                     {...getFieldProps('regexpStr', {
                         initialValue: ''
@@ -94,7 +68,9 @@ function Form({
                     size="small"
                     style={{ width: '100%' }}
                 />
-                <FormControl>
+            </Grid>
+            <Grid item xs={3}>
+                <FormControl fullWidth>
                     <InputLabel id="type">响应拦截模式</InputLabel>
                     <Select
                         {...getFieldProps('mode', {
@@ -103,16 +79,29 @@ function Form({
                         labelId="type"
                         label="响应拦截模式"
                         size="small"
-                        style={{ width: '150px' }}
+                        fullWidth
                     >
                         {
                             tabs.map((item) => <MenuItem value={item.id}>{item.label}</MenuItem>)
                         }
                     </Select>
                 </FormControl>
-            </Stack>
-            <Button onClick={submit}>保存</Button>
-        </Stack>
+            </Grid>
+            <Grid item xs={3}>
+                <Stack direction={'row'}>
+                    启用：
+                    <Switch {...getFieldProps('enabled', {
+                        valuePropName: "checked",
+                        initialValue: true
+                    })} />
+                </Stack>
+            </Grid>
+            <Grid item xs={1}>
+                <Stack direction={'row'} justifyContent={'flex-end'}>
+                    <Button onClick={submit}>保存</Button>
+                </Stack>
+            </Grid>
+        </Grid>
         <ModeTab
             tabs={tabs}
         />

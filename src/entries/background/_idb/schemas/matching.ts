@@ -1,5 +1,5 @@
 const schema = {
-    title: 'collection node',
+    title: 'resJson node',
     version: 0,
     primaryKey: 'id',
     type: 'object',

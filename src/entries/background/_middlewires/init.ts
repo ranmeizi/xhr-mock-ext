@@ -9,6 +9,6 @@ export default async function (ctx: Ctx, next: () => void) {
     // 预处理
     ctx.action = ctx.message.type
     ctx.data = ctx.message.data
-
+    console.log('??')
     await next()
 }
