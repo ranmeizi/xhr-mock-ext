@@ -1,5 +1,6 @@
 // @ts-nocheck
 import { proxy, unProxy } from "ajax-hook";
+import { open } from './notification'
 
 let matchings: MatchingEntity[] = []
 
@@ -9,6 +10,10 @@ proxy({
         for (const matching of matchings) {
             const regexp = new RegExp(matching.regexpStr)
             if (regexp.test(config.url)) {
+                open({
+                    title: 'xhr_mock_ext拦截提醒',
+                    content: `/<span style="color:red">${matching.regexpStr}</span>/ ,已被拦截`
+                })
                 return handler.resolve({
                     config: config,
                     status: 200,
@@ -21,10 +26,6 @@ proxy({
         handler.next(config);
     }
 })
-
-function openModal(){
-    
-}
 
 function init() {
     getMatchings()

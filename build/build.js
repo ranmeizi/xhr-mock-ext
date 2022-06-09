@@ -11,7 +11,7 @@ const manifest = require('../src/manifest.json')
 
 const manifest_content_scripts = {
   matches: ['<all_urls>'],
-  css: [],
+  css: ['css/ext_content.css'],
   js: []
 }
 

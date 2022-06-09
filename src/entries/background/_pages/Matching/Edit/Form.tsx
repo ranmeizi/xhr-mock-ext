@@ -88,7 +88,7 @@ function Form({
                 </FormControl>
             </Grid>
             <Grid item xs={3}>
-                <Stack direction={'row'}>
+                <Stack direction={'row'} alignItems={'center'}>
                     启用：
                     <Switch {...getFieldProps('enabled', {
                         valuePropName: "checked",
