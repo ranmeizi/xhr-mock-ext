@@ -29,5 +29,6 @@ background 拓展页用来维护一下请求配置
 
 ### 更新配置 
 刷新应用页面来触发 inject script 和 backgroung 的数据同步 
+拦截成功后，会在右下角弹出 notification 提示你 某某匹配url触发拦截了
 
 还在开发中，希望大家多多提意见
