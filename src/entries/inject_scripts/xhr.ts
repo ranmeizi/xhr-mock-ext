@@ -1,12 +1,13 @@
 // @ts-nocheck
 import { proxy, unProxy } from "ajax-hook";
-import { open } from './notification'
+import { open } from '../../components/notification'
 
 let matchings: MatchingEntity[] = []
 
 proxy({
     //请求发起前进入
     onRequest: async (config, handler) => {
+        const showN = localStorage.getItem('chrome_mock_ext_show_notification') === '1'
         for (const matching of matchings) {
             const regexp = new RegExp(matching.regexpStr)
             if (regexp.test(config.url)) {
